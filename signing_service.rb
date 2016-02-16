@@ -26,7 +26,7 @@ class SigningService
 
     def sign_params(options={})
       key = OpenSSL::PKey::RSA.new options[:private_key]
-      Base64.encode64(key.sign(OpenSSL::Digest::SHA1.new, options[:params])).gsub("\n", '')
+      Base64.strict_encode64(key.sign(OpenSSL::Digest::SHA1.new, options[:params])).gsub("\n", '')
     end
 
     def verify_params(options={})
